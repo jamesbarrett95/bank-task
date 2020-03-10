@@ -40,7 +40,6 @@ export class RegionCountriesSelectorComponent implements OnInit {
   }
 
   public getAsiaCountries(): void {
-    console.log('CALLING ASIA API');
     this.countriesService.getAsiaCoutries().subscribe(asiaCountryData => {
       this.asiaCountryData = asiaCountryData;
       this.displayAsia = true;
@@ -49,7 +48,6 @@ export class RegionCountriesSelectorComponent implements OnInit {
   }
 
   public getEuropeCountries(): void {
-    console.log('CALLING EUROPE API');
     this.countriesService.getEuropeCoutries().subscribe(euCountryData => {
       this.euCountryData = euCountryData;
       this.displayEu = true;
