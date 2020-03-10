@@ -1,15 +1,23 @@
 <label for="regions">Regions</label>
 
-<select name="regions" id="regions" (change)="getCountries($event.target.value)">
+<select name="regions" id="regions" (change)="handleDropdownChange($event.target.value)">
   <option value="please-select" disabled selected="selected">Please Select</option>
   <option value="Europe">Europe</option>
   <option value="Asia">Asia</option>
 </select>
 
-<ng-container *ngIf="countryData">
-  <select name="countries" id="countries" (change)="getCountryData($event.target.value)">
+<ng-container *ngIf="euCountryData && displayEu">
+  <select name="countries" id="countries" (change)="getEuropeCountryData($event.target.value)">
     <option value="please-select" disabled selected="selected">Please Select</option>
-    <option *ngFor="let country of countryData" [value]="country.name">
+    <option *ngFor="let country of euCountryData" [value]="country.name">
+      {{country.name}}</option>
+  </select>
+</ng-container>
+
+<ng-container *ngIf="asiaCountryData && displayAsia">
+  <select name="countries" id="countries" (change)="getAsiaCountryData($event.target.value)">
+    <option value="please-select" disabled selected="selected">Please Select</option>
+    <option *ngFor="let country of asiaCountryData" [value]="country.name">
       {{country.name}}</option>
   </select>
 </ng-container>

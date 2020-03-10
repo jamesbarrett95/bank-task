@@ -9,7 +9,11 @@ import { Country } from 'src/app/models/Country';
 })
 export class RegionCountriesSelectorComponent implements OnInit {
 
-  public countryData: Country[];
+  public euCountryData: Country[];
+  public asiaCountryData: Country[];
+
+  public displayAsia = false;
+  public displayEu = false;
 
   @Output() countryToViewEmitter = new EventEmitter<Country>();
 
@@ -18,14 +22,48 @@ export class RegionCountriesSelectorComponent implements OnInit {
   ngOnInit() {
   }
 
-  public getCountries(region: string): void {
-    this.countriesService.getCountriesFromRegion(region).subscribe(countryData => {
-      this.countryData = countryData;
+  public handleDropdownChange(selectedRegion: string): void {
+    const region = selectedRegion.toLowerCase();
+
+    // Prevent successive API calls
+    if (region == 'europe' && this.euCountryData) {
+      this.displayAsia = false;
+      this.displayEu = true;
+      return;
+    }
+    if (region == 'asia' && this.asiaCountryData) {
+      this.displayEu = false;
+      this.displayAsia = true;
+      return;
+    };
+    region == 'europe' ? this.getEuropeCountries() : this.getAsiaCountries();
+  }
+
+  public getAsiaCountries(): void {
+    console.log('CALLING ASIA API');
+    this.countriesService.getAsiaCoutries().subscribe(asiaCountryData => {
+      this.asiaCountryData = asiaCountryData;
+      this.displayAsia = true;
+      this.displayEu = false;
     })
   }
 
-  public getCountryData(selectedCountry: string): void {
-    const countryToView = this.countryData.find(country => country.name == selectedCountry);
+  public getEuropeCountries(): void {
+    console.log('CALLING EUROPE API');
+    this.countriesService.getEuropeCoutries().subscribe(euCountryData => {
+      this.euCountryData = euCountryData;
+      this.displayEu = true;
+      this.displayAsia = false;
+    })
+  }
+
+  public getAsiaCountryData(selectedCountry: string): void {
+    const countryToView = this.asiaCountryData.find(country => country.name == selectedCountry);
+    this.countryToViewEmitter.emit(countryToView);
+  }
+
+  public getEuropeCountryData(selectedCountry: string): void {
+    const countryToView = this.euCountryData.find(country => country.name == selectedCountry);
     this.countryToViewEmitter.emit(countryToView);
   }
 
