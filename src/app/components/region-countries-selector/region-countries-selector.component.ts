@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CountriesService } from 'src/app/services/countries.service';
-import { Observable } from 'rxjs';
 import { Country } from 'src/app/models/Country';
 
 @Component({
@@ -10,16 +9,24 @@ import { Country } from 'src/app/models/Country';
 })
 export class RegionCountriesSelectorComponent implements OnInit {
 
-  public countries$: Observable<Country[]>;
+  public countryData: Country[];
+
+  @Output() countryToViewEmitter = new EventEmitter<Country>();
 
   constructor(public countriesService: CountriesService) { }
 
   ngOnInit() {
   }
 
-  getCountries(region: string): void {
-    this.countries$ = this.countriesService.getCountriesFromRegion(region);
-    this.countries$.subscribe(data => console.log(data));
+  public getCountries(region: string): void {
+    this.countriesService.getCountriesFromRegion(region).subscribe(countryData => {
+      this.countryData = countryData;
+    })
+  }
+
+  public getCountryData(selectedCountry: string): void {
+    const countryToView = this.countryData.find(country => country.name == selectedCountry);
+    this.countryToViewEmitter.emit(countryToView);
   }
 
 }

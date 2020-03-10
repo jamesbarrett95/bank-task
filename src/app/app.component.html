@@ -1,1 +1,2 @@
-<app-region-countries-selector></app-region-countries-selector>
+<app-region-countries-selector (countryToViewEmitter)="viewCountryData($event)"></app-region-countries-selector>
+<app-country-details *ngIf="countryDataToView" [countryDataToView]="countryDataToView"></app-country-details>

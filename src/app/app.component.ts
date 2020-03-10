@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Country } from './models/Country';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'bank-test';
+
+  public countryDataToView: Country;
+
+  public viewCountryData(country: Country): void {
+    this.countryDataToView = country;
+  }
+
 }

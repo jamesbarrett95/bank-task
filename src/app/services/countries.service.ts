@@ -14,8 +14,6 @@ export class CountriesService {
   private regionsUrl = "https://restcountries.eu/rest/v2/region";
 
   public getCountriesFromRegion(region: string): Observable<Country[]> {
-    return this.http.get<Country[]>(`${this.regionsUrl}/${region}`).pipe(
-      // CONVERT TO MODEL
-    );
+    return this.http.get<Country[]>(`${this.regionsUrl}/${region}`);
   }
 }

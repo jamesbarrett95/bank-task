@@ -1,1 +1,12 @@
-<p>country-details works!</p>
+<div class="country-data">
+  <p>Country: {{countryName}}</p>
+  <p>Capital: {{countryCapital}}</p>
+  <p>Population: {{countryPopuation}}</p>
+  <div class="currencies">
+    <p>Currencies:</p>
+    <small *ngFor="let currency of currencies">
+      {{currency.name}}
+    </small>
+  </div>
+  <img [src]="flag" />
+</div>
