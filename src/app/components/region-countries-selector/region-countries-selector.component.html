@@ -1,14 +1,14 @@
 <label for="regions">Regions</label>
 
 <select name="regions" id="regions" (change)="getCountries($event.target.value)">
-  <option value="please-select" disabled>Please Select</option>
+  <option value="please-select" disabled selected="selected">Please Select</option>
   <option value="Europe">Europe</option>
   <option value="Asia">Asia</option>
 </select>
 
 <ng-container *ngIf="countryData">
   <select name="countries" id="countries" (change)="getCountryData($event.target.value)">
-    <option value="please-select" disabled>Please Select</option>
+    <option value="please-select" disabled selected="selected">Please Select</option>
     <option *ngFor="let country of countryData" [value]="country.name">
       {{country.name}}</option>
   </select>

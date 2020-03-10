@@ -18,17 +18,20 @@ export class CountryDetailsComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit() {
+    this.getCountryData();
+  }
+
+  ngOnChanges() {
+    this.getCountryData();
+  }
+
+  private getCountryData(): void {
     const { name, capital, population, currencies, flag } = this.countryDataToView;
     this.countryName = name;
     this.countryCapital = capital;
     this.countryPopuation = population;
     this.currencies = currencies;
     this.flag = flag;
-    console.log(currencies);
-  }
-
-  ngOnChanges() {
-
   }
 
 }
