@@ -1,19 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule }    from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
-import { MyCounterComponent } from './my-counter/my-counter.component';
-import { counterReducer } from './counter.reducer';
+import { RegionCountriesSelectorComponent } from './components/region-countries-selector/region-countries-selector.component';
+import { CountryDetailsComponent } from './components/country-details/country-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MyCounterComponent
+    RegionCountriesSelectorComponent,
+    CountryDetailsComponent
   ],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({ count: counterReducer })
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
