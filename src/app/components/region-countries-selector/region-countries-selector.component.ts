@@ -26,17 +26,17 @@ export class RegionCountriesSelectorComponent implements OnInit {
     const region = selectedRegion.toLowerCase();
 
     // Prevent successive API calls
-    if (region == 'europe' && this.euCountryData) {
+    if (region === 'europe' && this.euCountryData) {
       this.displayAsia = false;
       this.displayEu = true;
       return;
     }
-    if (region == 'asia' && this.asiaCountryData) {
+    if (region === 'asia' && this.asiaCountryData) {
       this.displayEu = false;
       this.displayAsia = true;
       return;
-    };
-    region == 'europe' ? this.getEuropeCountries() : this.getAsiaCountries();
+    }
+    region === 'europe' ? this.getEuropeCountries() : this.getAsiaCountries();
   }
 
   public getAsiaCountries(): void {
@@ -44,7 +44,7 @@ export class RegionCountriesSelectorComponent implements OnInit {
       this.asiaCountryData = asiaCountryData;
       this.displayAsia = true;
       this.displayEu = false;
-    })
+    });
   }
 
   public getEuropeCountries(): void {
@@ -52,16 +52,16 @@ export class RegionCountriesSelectorComponent implements OnInit {
       this.euCountryData = euCountryData;
       this.displayEu = true;
       this.displayAsia = false;
-    })
+    });
   }
 
   public getAsiaCountryData(selectedCountry: string): void {
-    const countryToView = this.asiaCountryData.find(country => country.name == selectedCountry);
+    const countryToView = this.asiaCountryData.find(country => country.name === selectedCountry);
     this.countryToViewEmitter.emit(countryToView);
   }
 
   public getEuropeCountryData(selectedCountry: string): void {
-    const countryToView = this.euCountryData.find(country => country.name == selectedCountry);
+    const countryToView = this.euCountryData.find(country => country.name === selectedCountry);
     this.countryToViewEmitter.emit(countryToView);
   }
 

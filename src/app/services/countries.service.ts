@@ -10,11 +10,7 @@ export class CountriesService {
 
   constructor(private http: HttpClient) { }
 
-  private regionsUrl = "https://restcountries.eu/rest/v2/region";
-
-  // public getCountriesFromRegion(region: string): Observable<Country[]> {
-  //   return this.http.get<Country[]>(`${this.regionsUrl}/${region}`);
-  // }
+  private regionsUrl = 'https://restcountries.eu/rest/v2/region';
 
   public getEuropeCoutries(): Observable<Country[]> {
     return this.http.get<Country[]>(`${this.regionsUrl}/europe`);
