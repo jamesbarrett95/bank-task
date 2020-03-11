@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegionCountriesSelectorComponent } from './region-countries-selector.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('RegionCountriesSelectorComponent', () => {
   let component: RegionCountriesSelectorComponent;
@@ -8,6 +9,7 @@ describe('RegionCountriesSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ RegionCountriesSelectorComponent ]
     })
     .compileComponents();
