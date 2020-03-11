@@ -23,4 +23,12 @@ describe('CountryDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should extract country details when the component initialises', () => {
+    // component.ngOnInit();
+  });
+
+  it('should extract country details when the component changes', () => {
+    // component.ngOnChanges();
+  });
 });
