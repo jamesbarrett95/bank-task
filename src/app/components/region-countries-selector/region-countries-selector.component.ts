@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, NgZone } from '@angular/core';
 import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/models/Country';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-region-countries-selector',
@@ -11,9 +12,9 @@ export class RegionCountriesSelectorComponent implements OnInit {
 
   public euCountryData: Country[];
   public asiaCountryData: Country[];
-
   public displayAsia = false;
   public displayEu = false;
+  public errorMessage: string;
 
   @Output() countryToViewEmitter = new EventEmitter<Country>();
 
@@ -23,6 +24,7 @@ export class RegionCountriesSelectorComponent implements OnInit {
   }
 
   public handleDropdownChange(selectedRegion: string): void {
+    this.errorMessage = null;
     const region = selectedRegion.toLowerCase();
 
     // Prevent successive API calls
@@ -40,19 +42,21 @@ export class RegionCountriesSelectorComponent implements OnInit {
   }
 
   public getAsiaCountries(): void {
-    this.countriesService.getAsiaCoutries().subscribe(asiaCountryData => {
-      this.asiaCountryData = asiaCountryData;
-      this.displayAsia = true;
-      this.displayEu = false;
-    });
+    this.countriesService.getAsiaCoutries().subscribe(
+      asiaCountryData => {
+        this.asiaCountryData = asiaCountryData;
+        this.displayAsia = true;
+        this.displayEu = false;
+    }, this.handleError);
   }
 
   public getEuropeCountries(): void {
-    this.countriesService.getEuropeCoutries().subscribe(euCountryData => {
-      this.euCountryData = euCountryData;
-      this.displayEu = true;
-      this.displayAsia = false;
-    });
+    this.countriesService.getEuropeCoutries().subscribe(
+      euCountryData => {
+        this.euCountryData = euCountryData;
+        this.displayEu = true;
+        this.displayAsia = false;
+    }, this.handleError);
   }
 
   public getAsiaCountryData(selectedCountry: string): void {
@@ -63,6 +67,10 @@ export class RegionCountriesSelectorComponent implements OnInit {
   public getEuropeCountryData(selectedCountry: string): void {
     const countryToView = this.euCountryData.find(country => country.name === selectedCountry);
     this.countryToViewEmitter.emit(countryToView);
+  }
+
+  private handleError = ({error, region}): void => {
+    this.errorMessage = `Cannot retrieve countries in ${region}. Please try another time. Error code: ${error.status}`;
   }
 
 }
