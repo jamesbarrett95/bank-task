@@ -1,27 +1,34 @@
-# BankTest
+# Albany Beck Task
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+## Installation Instructions
 
-## Development server
+`npm i`
+`npm run start`
+`Navigate to localhost:4200`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## How the application works
 
-## Code scaffolding
+As the application wasn't designed with NGRX, this application is reliant on simple parent and child communication to manage state. With this approach, it's important to keep components as 'dumb' as possible so that they are easier to unit test. To achieve this, state is managed by the app component.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+A service was created for fetching data from the API. It utilises error handling which was implemented with RxJS.
 
-## Build
+To prevent successive API calls, the region-countries component uses flags to determine if the data is already retrieved.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## CSS Coding Standards
 
-## Running unit tests
+SCSS was chosen due to reusable CSS and familiarity
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## What I would do if given more time
 
-## Running end-to-end tests
+- Utilse NGRX for managing state and preventing API calls
+- Finish the unit tests with Jest and enable code coverage
+- Code cleanup
+- Styling. Using the BEM methodology for appropriate class names
+- Type all variables
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Going forward
 
-## Further help
+I have created another branch on my GitHub to convert this application to NGRX as I am keen to learn the technology.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
