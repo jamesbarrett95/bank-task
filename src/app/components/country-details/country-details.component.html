@@ -1,12 +1,13 @@
 <div class="country-data">
+  <h2>Country Data</h2>
   <p>Country: {{countryName}}</p>
   <p>Capital: {{countryCapital}}</p>
   <p>Population: {{countryPopuation}}</p>
   <div class="currencies">
     <p>Currencies:</p>
-    <small *ngFor="let currency of currencies">
-      {{currency.name}}
-    </small>
+    <ul>
+      <li *ngFor="let currency of currencies">{{currency.name}}</li>
+    </ul>
   </div>
-  <img [src]="flag" />
+  <img width="200px" [src]="flag" />
 </div>

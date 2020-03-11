@@ -1,33 +1,36 @@
-<h2>Select Region and Country</h2>
+<div class="regions-countries-area">
+  <h2>Select Region and Country</h2>
 
-<div class="regions-selection">
-  <label for="regions">Regions</label>
+  <div class="regions-selection">
+    <label for="regions">Regions</label>
 
-  <select name="regions" id="regions" (change)="handleDropdownChange($event.target.value)">
-    <option value="please-select" disabled selected="selected">Please Select</option>
-    <option value="Europe">Europe</option>
-    <option value="Asia">Asia</option>
-  </select>
-</div>
-
-<div class="countries-selection">
-  <ng-container *ngIf="euCountryData && displayEu">
-    <label for="euCountries">Countries</label>
-    <select name="euCountries" id="euCountries" (change)="getEuropeCountryData($event.target.value)">
+    <select name="regions" id="regions" (change)="handleDropdownChange($event.target.value)">
       <option value="please-select" disabled selected="selected">Please Select</option>
-      <option *ngFor="let country of euCountryData" [value]="country.name">
-        {{country.name}}</option>
+      <option value="Europe">Europe</option>
+      <option value="Asia">Asia</option>
     </select>
-  </ng-container>
+  </div>
+
+  <div class="countries-selection">
+    <ng-container *ngIf="euCountryData && displayEu">
+      <label for="euCountries">Countries</label>
+      <select name="euCountries" id="euCountries" (change)="getEuropeCountryData($event.target.value)">
+        <option value="please-select" disabled selected="selected">Please Select</option>
+        <option *ngFor="let country of euCountryData" [value]="country.name">
+          {{country.name}}</option>
+      </select>
+    </ng-container>
+  </div>
+
+  <div class="countries-selection">
+    <ng-container *ngIf="asiaCountryData && displayAsia">
+      <label for="asiaCountries">Countries</label>
+      <select name="countries" id="countries" (change)="getAsiaCountryData($event.target.value)">
+        <option value="please-select" disabled selected="selected">Please Select</option>
+        <option *ngFor="let country of asiaCountryData" [value]="country.name">
+          {{country.name}}</option>
+      </select>
+    </ng-container>
+  </div>
 </div>
 
-<div class="countries-selection">
-  <ng-container *ngIf="asiaCountryData && displayAsia">
-    <label for="asiaCountries">Countries</label>
-    <select name="countries" id="countries" (change)="getAsiaCountryData($event.target.value)">
-      <option value="please-select" disabled selected="selected">Please Select</option>
-      <option *ngFor="let country of asiaCountryData" [value]="country.name">
-        {{country.name}}</option>
-    </select>
-  </ng-container>
-</div>
