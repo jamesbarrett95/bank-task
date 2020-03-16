@@ -6,6 +6,9 @@
 `npm run start`
 `Navigate to localhost:4200`
 
+## Run tests (incomplete)
+`npm run test`
+
 ## How the application works
 
 As the application wasn't designed with NGRX, this application is reliant on simple parent and child communication to manage state. With this approach, it's important to keep components as 'dumb' as possible so that they are easier to unit test. To achieve this, state is managed by the app component.
