@@ -11,7 +11,7 @@
     </select>
   </div>
 
-  <div class="countries-selection">
+  <!-- <div class="countries-selection">
     <ng-container *ngIf="euCountryData && displayEu">
       <label for="euCountries">Countries</label>
       <select name="euCountries" id="euCountries" (change)="getEuropeCountryData($event.target.value)">
@@ -31,10 +31,8 @@
           {{country.name}}</option>
       </select>
     </ng-container>
-  </div>
+  </div> -->
 </div>
 
-<div *ngIf="errorMessage">
-  <p class="error">{{errorMessage}}</p>
-</div>
+<p>{{ euCountryData$ | async }}</p>
 

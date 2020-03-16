@@ -1,7 +1,13 @@
 import { Component, OnInit, Output, EventEmitter, NgZone } from '@angular/core';
 import { CountriesService } from 'src/app/services/countries.service';
 import { Country } from 'src/app/models/Country';
-import { HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { GetEuropeCountries } from 'src/app/store/actions/europe.actions';
+import { GetAsiaCountries } from 'src/app/store/actions/asia.actions';
+import { selectEuropeanCountriesList } from 'src/app/store/selectors/europe.selectors';
+import { IAppState } from 'src/app/store/state/app.state';
+
 
 @Component({
   selector: 'app-region-countries-selector',
@@ -10,67 +16,20 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegionCountriesSelectorComponent implements OnInit {
 
-  public euCountryData: Country[];
-  public asiaCountryData: Country[];
-  public displayAsia = false;
-  public displayEu = false;
-  public errorMessage: string;
+  public euCountryData$ = this.store.pipe(select(selectEuropeanCountriesList));
 
-  @Output() countryToViewEmitter = new EventEmitter<Country>();
-
-  constructor(public countriesService: CountriesService) { }
+  constructor(
+    public countriesService: CountriesService,
+    private store: Store<IAppState>
+    ) { }
 
   ngOnInit() {
   }
 
   public handleDropdownChange(selectedRegion: string): void {
-    this.errorMessage = null;
-    const region = selectedRegion.toLowerCase();
 
-    // Prevent successive API calls
-    if (region === 'europe' && this.euCountryData) {
-      this.displayAsia = false;
-      this.displayEu = true;
-      return;
-    }
-    if (region === 'asia' && this.asiaCountryData) {
-      this.displayEu = false;
-      this.displayAsia = true;
-      return;
-    }
-    region === 'europe' ? this.getEuropeCountries() : this.getAsiaCountries();
+    selectedRegion === 'Europe'
+      ? this.store.dispatch(new GetEuropeCountries())
+      : this.store.dispatch(new GetAsiaCountries());
   }
-
-  public getAsiaCountries(): void {
-    this.countriesService.getAsiaCoutries().subscribe(
-      asiaCountryData => {
-        this.asiaCountryData = asiaCountryData;
-        this.displayAsia = true;
-        this.displayEu = false;
-    }, this.handleError);
-  }
-
-  public getEuropeCountries(): void {
-    this.countriesService.getEuropeCoutries().subscribe(
-      euCountryData => {
-        this.euCountryData = euCountryData;
-        this.displayEu = true;
-        this.displayAsia = false;
-    }, this.handleError);
-  }
-
-  public getAsiaCountryData(selectedCountry: string): void {
-    const countryToView = this.asiaCountryData.find(country => country.name === selectedCountry);
-    this.countryToViewEmitter.emit(countryToView);
-  }
-
-  public getEuropeCountryData(selectedCountry: string): void {
-    const countryToView = this.euCountryData.find(country => country.name === selectedCountry);
-    this.countryToViewEmitter.emit(countryToView);
-  }
-
-  private handleError = ({error, region}): void => {
-    this.errorMessage = `Cannot retrieve countries in ${region}. Please try another time. Error code: ${error.status}`;
-  }
-
 }
