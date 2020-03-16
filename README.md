@@ -31,7 +31,7 @@ SCSS was chosen due to reusable CSS and familiarity
 
 ## Going forward
 
-I have created another branch on my GitHub to convert this application to NGRX as I am keen to learn the technology.
+I will create another branch on my GitHub to convert this application to NGRX as I am keen to learn the technology.
 
 
 
