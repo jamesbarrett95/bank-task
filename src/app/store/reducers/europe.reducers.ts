@@ -8,7 +8,8 @@ export const europeReducers = (
 ): IEuropeCountryState => {
   switch (action.type) {
     case EEuropeActions.GetEuropeCountriesSuccess: {
-      console.log('successful!');
+      console.log('GET COUNTRIES SUCCESS REDUCER');
+      console.log(action.payload);
       return {
         ...state,
         countries: action.payload

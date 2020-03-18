@@ -12,7 +12,9 @@ export class GetEuropeCountries implements Action {
 
 export class GetEuropeCountriesSuccess implements Action {
   public readonly type = EEuropeActions.GetEuropeCountriesSuccess;
-  constructor(public payload: Country[]) {}
+  constructor(public payload: Country[]) {
+    console.log('GetEuropeCountriesSuccess Dispatched');
+  }
 }
 
 export type EuropeActions = GetEuropeCountries | GetEuropeCountriesSuccess;
